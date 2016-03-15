@@ -13,5 +13,5 @@ echo '#!/bin/bash' >> init.sh
 echo "NAME=$NAME" >> init.sh
 echo 'sudo ln -fs $PWD/etc/nginx.conf /etc/nginx/sites-enabled/$NAME' >> init.sh
 echo 'sudo /etc/init.d/nginx restart' >> init.sh
-echo 'sudo ln -fs $PWD/etc/gunicorn.conf /etc/gunicorn.d/$NAME' >> init.sh
-echo 'sudo /etc/inid.d/gunicorn restart' >> init.sh
+echo 'sudo ln -fs $PWD/etc/gu-hello.py /etc/gunicorn.d/gu-hello.py' >> init.sh
+echo 'sudo /etc/init.d/gunicorn restart' >> init.sh

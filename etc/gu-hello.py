@@ -1,6 +1,6 @@
 CONFIG = {
     'mode': 'wsgi',
-    'working_dir': '/home/box/apps',
+    'working_dir': '/home/box/',
     # 'python': '/usr/bin/python3',
     'args': (
         '--bind=:8080',
