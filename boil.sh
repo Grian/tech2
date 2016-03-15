@@ -1,5 +1,8 @@
 #!/bin/bash
 mkdir -p etc public/{img,css,js} uploads/
+mkdir -p logs
+mkdir -p apps
+chmod 0755 logs
 touch etc/nginx.conf
 touch etc/gunicorn.conf
 touch  init.sh
