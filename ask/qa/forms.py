@@ -3,6 +3,7 @@
 from django import forms
 from django.http import HttpResponseRedirect
 from qa import models 
+from django.contrib.auth.models import User
 class AskForm(forms.Form):
 	title = forms.CharField(widget=forms.Textarea)
 	text  = forms.CharField(widget=forms.Textarea)
@@ -29,6 +30,22 @@ class AnswerForm(forms.Form):
             answer.save()
             return answer
 
+
+
+class SignUpForm(forms.Form):
+	username = forms.CharField();
+	email    = forms.EmailField();
+	password = forms.CharField()
+
+	def save(self):
+		cd = self.cleaned_data
+		user = User.objects.create_user(self.cleaned_data['username'],cd['email'], cd['password']);
+		user.save();
+		return user;
+
+class LoginForm(forms.Form):
+	username = forms.CharField();
+	password = forms.CharField()
 
 
             

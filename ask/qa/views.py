@@ -4,9 +4,34 @@ from django.shortcuts import render,get_object_or_404
 from django.views.decorators.http import require_GET
 from qa.models import Question,Answer
 from django.core.paginator import Paginator
-from qa.forms import AskForm,AnswerForm
+from django.contrib.auth import authenticate, login
+from qa.forms import AskForm,AnswerForm, LoginForm, SignUpForm
 
 # Create your views here.
+
+def my_login(request):
+    form = LoginForm()
+    ok = True
+    user = None
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        user = authenticate(username=request.POST.get('username',''), password=request.POST.get('password',''))
+        if user is not None:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect('/')
+        ok = False
+    return render(request, 'my_login.html', { 'form':form, 'user': user, 'ok': ok })
+
+def my_signup(request):
+    form = SignUpForm()
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return HttpResponseRedirect('/')
+    return render(request, "my_signup.html", { 'form' : form });
+
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK');
@@ -54,6 +79,7 @@ def main_pager(request):
             'questions' : page.object_list,
             'page' : page,
             'paginator':paginator,
+            'user': request.user,
         }
     );
 @require_GET

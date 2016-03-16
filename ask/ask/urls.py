@@ -11,11 +11,13 @@ urlpatterns = patterns('',
 
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', main_pager),
-    url(r'^login/', test),
-    url(r'^signup/', test),
     url(r'^question/(\d+)/', question, name='question-item'),
     url(r'^popular/', popular_pager),
     url(r'^new/', test),
     url(r'^ask/', views.ask),
-    url(r'^answer/', views.answer, name="answer-item")
+    url(r'^answer/', views.answer, name="answer-item"),
+    url(r'^login/', views.my_login, name="login-item"),
+    url(r'^signup/', views.my_signup, name="signup-item"),
+    
+
 )
