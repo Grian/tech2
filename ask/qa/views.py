@@ -49,6 +49,7 @@ def ask(request):
     if request.method == 'POST':
         form = AskForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             question = form.save()
             return HttpResponseRedirect(question.get_url())
 
@@ -56,7 +57,7 @@ def ask(request):
     elif request.method == 'GET':
         form = AskForm()
 
-    return render(request,"ask_form.html", { "form" : form })
+    return render(request,"ask_form.html", { "form" : form, "user": request.user })
 
 
 @require_GET
@@ -110,6 +111,7 @@ def answer(request):
     if request.method == 'POST':
         form = AnswerForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             answer = form.save()
             return HttpResponseRedirect(answer.question.get_url())
     return question(request,form.cleaned_data["question_id"],form = form)
@@ -127,5 +129,6 @@ def question(request,qid, form=None):
         'question': question, 
         'answers' : question.answer_set.all(),
         'answers_len' : len(question.answer_set.all()),
-        'form' : form
+        'form' : form,
+        "user" : request.user,
     })

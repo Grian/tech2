@@ -1,14 +1,15 @@
 <h2>{{ question.title }}</h2>
+User: {{ user }}<br>
 <p>{{question.text }}</p>
 <form action="{% url 'answer-item' %}" method="POST">
-{%csrf_token%}
+	{%csrf_token%}
 	{{ form.as_p }}
 <input type="submit">
 </form>
 {% if answers_len %}
 <h4> Ответы </h4>
 {% for ans in answers %}
-<p>{{ ans.text }}</p>
+<p>{{ ans.author }}: {{ ans.text }}</p>
 {% endfor %}
 {% endif %}
 
