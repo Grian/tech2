@@ -57,7 +57,7 @@ def popular_pager(request):
         raise Http404
     return render(
         request,
-        'main.html',
+        'popular.html',
         {
             'questions' : page.object_list,
             'page' : page,

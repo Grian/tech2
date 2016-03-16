@@ -2,12 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
+def rating_default():
+	return 1
+def text_default():
+	return 'text_blank'
 # Create your models here.
 class Question(models.Model):
     title = models.CharField(max_length=255)
-    text  = models.TextField()
+    text  = models.TextField(default=text_default)
     added_at = models.DateTimeField(auto_now_add=True)
-    rating = models.IntegerField()
+    rating = models.IntegerField(default=rating_default)
     author = models.ForeignKey(User, null = True, on_delete = models.SET_NULL)
     likes  = models.ManyToManyField(User, related_name = 'likes_set')
     def __unicode__(self):
