@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class AskForm(forms.Form):
 	title = forms.CharField(widget=forms.Textarea)
 	text  = forms.CharField(widget=forms.Textarea)
+	author = forms.IntegerField()
 
 	def save(self):
 		question = models.Question(**self.cleaned_data)
@@ -16,6 +17,7 @@ class AskForm(forms.Form):
 class AnswerForm(forms.Form):
     text     = forms.CharField(widget=forms.Textarea)
     question = forms.CharField(widget=forms.HiddenInput())
+    author = forms.IntegerField()
     def clean(self):
         try:
             question_id = int(self.cleaned_data['question'])
