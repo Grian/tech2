@@ -1,5 +1,10 @@
 <h2>{{ question.title }}</h2>
 <p>{{question.text }}</p>
+<form action="{% url 'answer-item' %}" method="POST">
+{%csrf_token%}
+	{{ form.as_p }}
+<input type="submit">
+</form>
 {% if answers_len %}
 <h4> Ответы </h4>
 {% for ans in answers %}

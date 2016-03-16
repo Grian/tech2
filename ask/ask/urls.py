@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from qa.views import test,tt,question,main_pager, popular_pager
+from qa import views
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,8 +14,8 @@ urlpatterns = patterns('',
     url(r'^login/', test),
     url(r'^signup/', test),
     url(r'^question/(\d+)/', question, name='question-item'),
-    url(r'^ask/', test),
     url(r'^popular/', popular_pager),
     url(r'^new/', test),
-    url(r'^tt/', tt),
+    url(r'^ask/', views.ask),
+    url(r'^answer/', views.answer, name="answer-item")
 )
