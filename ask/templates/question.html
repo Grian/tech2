@@ -1,0 +1,9 @@
+<h2>{{ question.title }}</h2>
+<p>{{question.text }}</p>
+{% if answers_len %}
+<h4> Ответы </h4>
+{% for ans in answers %}
+<p>{{ ans.text }}</p>
+{% endfor %}
+{% endif %}
+
