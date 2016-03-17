@@ -29,6 +29,8 @@ def my_signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user2 = authenticate(username=request.POST.get('username',''), password=request.POST.get('password',''))
+            login(request,user2)
             return HttpResponseRedirect('/')
     return render(request, "my_signup.html", { 'form' : form });
 
