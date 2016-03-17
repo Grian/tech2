@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# vim: ts=4 ts=4 sts=4 et
 from django.http import HttpResponseBadRequest, Http404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404
